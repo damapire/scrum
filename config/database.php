@@ -1,15 +1,18 @@
 <?php
-
 class Conexion {
+    public static function conectar(){
+        $host = getenv('DB_HOST');
+        $user = getenv('DB_USER');
+        $password = getenv('DB_PASSWORD');
+        $database = getenv('DB_NAME');
 
-    public static function conectar() {
-        $conexion = new mysqli("127.0.0.1", "root", "", "scrum");
-        if(!$conexion) {
-            die("Conexión fallida: " . mysqli_connect_error());
+        $conexion = new mysqli($host, $user, $password, $database);
+
+        if ($conexion->connect_error) {
+            die("Conexión fallida: " . $conexion->connect_error);
         }
         return $conexion;
     }
-
 }
 
 ?>
